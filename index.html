@@ -42,7 +42,8 @@
                         </label>
                         <textarea name="data" required class="form-control" id="data" style="min-height: 150px;"></textarea>
                     </div>
-                    <button id="generateBtn" class="btn btn-primary">Generate</button>
+                    <button id="generateBtnWin" class="btn btn-primary">Generate for Win</button>
+                    <button id="generateBtnMac" class="btn btn-primary">Generate for Mac</button>
                 </div>
             </div>
         </div>
@@ -52,7 +53,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered"" role=" document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Result</h5>
+                    <h5 id="resultTitle" class="modal-title">Result</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -81,14 +82,24 @@
         let namespace = document.getElementById('namespace');
         let secretName = document.getElementById('secretName');
         let data = document.getElementById('data');
-        let generateBtn = document.getElementById('generateBtn');
+        let generateBtnWin = document.getElementById('generateBtnWin');
+        let generateBtnMac = document.getElementById('generateBtnMac');
 
-        generateBtn.onclick = function (event) {
+        generateBtnWin.onclick = function (event) {
             document.getElementById('result').innerHTML
-                = generate(secretName.value, namespace.value, JSON.parse(data.value));
+                = generateForWin(secretName.value, namespace.value, JSON.parse(data.value));
             $('#myModal').modal('show');
+
+            document.getElementById('resultTitle').innerHTML = "Result for Win";
         };
 
+        generateBtnMac.onclick = function (event) {
+            document.getElementById('result').innerHTML
+                = generateForMac(secretName.value, namespace.value, JSON.parse(data.value));
+            $('#myModal').modal('show');
+
+            document.getElementById('resultTitle').innerHTML = "Result for Mac";
+        };
     </script>
 </body>
 
